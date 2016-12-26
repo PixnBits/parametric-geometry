@@ -1,0 +1,26 @@
+{
+  "name": "parametric-geometry",
+  "version": "0.1.0-pre",
+  "description": "Parametically defined Geometry",
+  "main": "lib/index.js",
+  "scripts": {
+    "test:lint": "eslint --ext .js ./",
+    "test:unit": "mocha \"test/**/*.spec.js\"",
+    "test": "npm run test:lint && npm run test:unit"
+  },
+  "author": "pixnbits",
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "eslint": "^3.12.2",
+    "eslint-config-airbnb-base": "^11.0.0",
+    "eslint-plugin-import": "^2.2.0",
+    "mocha": "^3.2.0"
+  },
+  "dependencies": {
+    "immutable": "^3.8.1",
+    "is-number": "^3.0.0",
+    "lodash": "^4.17.3",
+    "mathjs": "^3.8.1"
+  }
+}
