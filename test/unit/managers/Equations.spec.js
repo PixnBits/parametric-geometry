@@ -74,8 +74,36 @@ describe('managers', () => {
       });
 
       it('throws if there\'s a missing variable', () => {
-        eq.add('var_a', '5+b');
+        eq.add('var_a', '5 + var_b');
         expect(() => eq.solve()).to.throw('unable to solve equations, got stuck');
+      });
+
+      it('throws if two equations yield different values', () => {
+        eq
+          .add('var_a', '5')
+          .add('var_a', '7');
+        expect(() => eq.solve()).to.throw('value mismatch for var_a: 5 vs 7');
+      });
+
+      it('removes the right solved equations', () => {
+        eq
+          .add('var_a', 'var_e + var_d')
+          .add('var_b', 4)
+          .add('var_c', 'var_b + 4')
+          .add('var_d', 7)
+          .add('var_e', 11)
+          .add('var_f', 'var_a + 12')
+          .add('var_g', 'var_f + 5');
+
+        expect(eq.solve()).to.deep.equal({
+          var_b: 4,
+          var_d: 7,
+          var_e: 11,
+          var_a: 11 + 7,
+          var_c: 4 + 4,
+          var_f: (11 + 7) + 12,
+          var_g: (11 + 7 + 12) + 5,
+        });
       });
     });
   });
